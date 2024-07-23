@@ -6,6 +6,11 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --background: hsl(0, 0%, 7%);
+  --primary: hsl(145, 100%, 40%);
+  --card: hsl(0, 0%, 13%);
+  --secondary: hsl(0, 0%, 33%);
+  --foreground: hsl(0, 0%, 70%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,12 +23,9 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
