@@ -15,13 +15,15 @@ export default async function Home() {
 
 
   return (
-    <main className="flex min-h-screen w-full items-center justify-center p-9 gap-4">
-      <div className="flex min-w-[800px] flex-col justify-center items-center gap-4 p-9">
+    <main className="flex flex-col 2xl:flex-row max-w-screen-2xl w-full items-center justify-center gap-4">
+      <div className="flex lg:p-9 transition-height duration-200 ease-in h-dvh text-nowrap flex-col justify-center items-center gap-4">
         <LandingPageText />
         <SignInButton>CONNECT WITH SPOTIFY</SignInButton>
       </div>
-      <div className="min-h-[800px] w-full relative overflow-hidden">
-        <Image className="object-contain" src="/landingpage.png" alt="avatar" fill />
+      <div className="w-full p-6">
+        <div className="h-auto min-h-[300px] md:min-h-[500px] 2xl:min-h-[800px] lg:p-9 w-full relative overflow-hidden">
+          <Image className="object-contain" src="/landingpage.png" alt="avatar" fill />
+        </div>
       </div>
     </main>
   );

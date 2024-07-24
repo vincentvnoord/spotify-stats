@@ -27,7 +27,7 @@ export const TrackList = () => {
                 const tracks = cache.get(timeFrame)?.list as BasicTrackInfo[];
                 if (tracks.length > 0) {
                     const date = cache.get(timeFrame)?.date;
-                    if (date && (new Date().getTime() - date.getTime()) < 1000 * 60 * 60 * 24) {
+                    if (date && (new Date().getTime() - date.getTime()) < 1000 * 120) {
                         setTopTracks(tracks);
                         return;
                     }
@@ -77,8 +77,8 @@ const TrackCard = ({ name, ranking, artist, image }: BasicTrackInfo) => {
         >
             <div className="flex gap-4 items-center">
                 <p className="text-xl min-w-9 text-center text-secondary">{ranking}</p>
-                <div className="w-10 h-10 object-fill relative rounded-md overflow-hidden">
-                    <Image src={image} alt="track" fill />
+                <div className="w-10 h-10 object-contain relative rounded-md overflow-hidden">
+                    <Image className="object-cover" src={image} alt="track" fill />
                 </div>
                 <div className="flex flex-col">
                     <p className="">{name}</p>

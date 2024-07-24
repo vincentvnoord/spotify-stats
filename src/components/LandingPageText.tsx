@@ -19,7 +19,7 @@ const LandingPageText = () => {
     }
 
     return (
-        <div className="text-5xl text-center font-extrabold flex gap-2">
+        <div className="text-3xl lg:text-5xl text-center font-extrabold flex gap-2">
             <h1 className="">Find your top</h1>
             <motion.div>
                 <h1>tracks</h1>

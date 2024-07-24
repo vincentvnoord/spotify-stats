@@ -44,8 +44,8 @@ const UserInfo = ({ display_name, images }: UserProps) => {
                 onClick={() => { setSelected(!selected) }}
                 className="flex gap-2 cursor-pointer items-center"
             >
-                <p className={`text-lg font-medium ${hovered ? "underline" : ""}`}>{display_name}</p>
-                <div className="relative bg-card rounded-full overflow-hidden w-12 h-12 object-contain">
+                <p className={`text-lg hidden md:block font-medium ${hovered ? "underline" : ""}`}>{display_name}</p>
+                <div className="relative bg-card rounded-full overflow-hidden w-10 h-10 md:w-12 md:h-12 object-contain">
                     <Image src={avatar} fill alt="avatar" />
                 </div>
 

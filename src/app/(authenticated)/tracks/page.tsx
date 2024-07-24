@@ -15,7 +15,7 @@ export default async function TracksPage({ searchParams }: { searchParams: { tim
 
     return (
         <main className="w-full relative h-full flex flex-col gap-3 p-3 lg:min-w-[1024px]">
-            <div className="sticky z-10 bg-background p-3 rounded-lg top-0 flex items-center justify-between">
+            <div className="sticky z-10 bg-background p-3 rounded-lg top-0 flex-col-reverse gap-4 flex md:flex-row items-center justify-between">
                 <div className="flex gap-2">
                     <TimeFrameButton timeFrame="short_term">latest</TimeFrameButton>
                     <TimeFrameButton timeFrame="medium_term">6 months</TimeFrameButton>

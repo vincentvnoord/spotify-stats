@@ -15,7 +15,7 @@ export const TimeFrameButton = ({ children, onClick, timeFrame }: { children: Re
 
     return (
         <Link href={currentPath}>
-            <button onClick={onClick} className={`transition-colors duration-200 ease-in-out min-w-28 font-semibold p-3 rounded-full ${selected ? selectedStyle : defaultStyle}`}>
+            <button onClick={onClick} className={`transition-colors duration-200 text-nowrap ease-in-out min-w-20 md:min-w-28 font-semibold p-3 md:p-3 rounded-full ${selected ? selectedStyle : defaultStyle}`}>
                 {children}
             </button>
         </Link>

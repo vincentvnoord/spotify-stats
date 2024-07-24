@@ -14,9 +14,9 @@ export default async function AuthLayout({
     }
 
     return (
-        <div className="p-6 flex flex-col gap-3">
+        <div className="p-6 pt-0 md:pt-6 flex flex-col md:gap-3">
             <Header />
-            <section className="bg-background rounded-lg p-3">
+            <section className="bg-background rounded-lg md:p-3">
                 {children}
             </section>
         </div>
