@@ -60,7 +60,7 @@ export const TrackList = () => {
     )
 }
 
-const TrackCard = ({ name, ranking, artist, image }: BasicTrackInfo) => {
+const TrackCard = ({ name, ranking, artists, image }: BasicTrackInfo) => {
     const [hovered, setHovered] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref);
@@ -82,7 +82,12 @@ const TrackCard = ({ name, ranking, artist, image }: BasicTrackInfo) => {
                 </div>
                 <div className="flex flex-col">
                     <p className="">{name}</p>
-                    <p className="text-secondary text-sm">{artist}</p>
+                    <p className="text-secondary text-sm">{artists.map((artist, index) => (
+                        <span key={index}>
+                            {artist.name}
+                            {index !== artists.length - 1 && ", "}
+                        </span>
+                    ))}</p>
                 </div>
             </div>
 

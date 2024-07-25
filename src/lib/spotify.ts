@@ -1,4 +1,4 @@
-import { BasicTrackInfo } from "@/types/spotify";
+import { BasicTrackInfo, BasicArtistInfo } from "@/types/spotify";
 
 export const login = () => {
     const scope = "user-read-private user-read-email";
@@ -40,11 +40,35 @@ export async function getTopTracks(accessToken: string, timeRange: string): Prom
             return {
                 name: track.name,
                 ranking: index + 1,
-                artist: track.artists[0].name,
+                artists: track.artists,
                 image: track.album.images[0].url
             }
         });
     }
 
     return tracks;
+}
+
+
+export async function getTopArtists(accessToken: string, timeRange: string): Promise<BasicArtistInfo[]> {
+    const response = await fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=50`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    let artists: BasicArtistInfo[] = [];
+
+    if (response.ok) {
+        const data = await response.json();
+        artists = data.items.map((artist: any, index: number) => {
+            return {
+                name: artist.name,
+                ranking: index + 1,
+                image: artist.images[0].url
+            }
+        });
+    }
+
+    return artists;
 }

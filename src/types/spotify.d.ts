@@ -2,6 +2,12 @@
 export type BasicTrackInfo = {
     name: string;
     ranking: number;
-    artist: string;
+    artists: { name: string }[];
+    image: string;
+}
+
+export type BasicArtistInfo = {
+    name: string;
+    ranking: number;
     image: string;
 }

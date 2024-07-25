@@ -1,5 +1,6 @@
 import { getSession } from "@/auth";
 import { Header } from "@/components/header/Header";
+import { SessionPage } from "@/components/SessionPage";
 import { redirect } from "next/navigation";
 
 
@@ -14,11 +15,13 @@ export default async function AuthLayout({
     }
 
     return (
-        <div className="p-6 pt-0 md:pt-6 flex flex-col md:gap-3">
+        <div className="p-6 max-w-screen-lg flex w-full flex-col gap-3">
             <Header />
-            <section className="bg-background rounded-lg md:p-3">
-                {children}
-            </section>
+            <SessionPage>
+                <section className="bg-background w-full rounded-lg md:p-3">
+                    {children}
+                </section>
+            </SessionPage>
         </div>
     );
 }

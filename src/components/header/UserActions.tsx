@@ -21,7 +21,7 @@ export const UserActions = ({ selected, menuRef }: { selected: boolean, menuRef:
     }
 
     return (
-        <div className="absolute pt-3 origin-top translate-y-[100%] bottom-0 right-0 z-20">
+        <div className="absolute pt-3 origin-top translate-y-[100%] bottom-0 right-0 z-50">
             <motion.div initial="hidden" variants={variants} animate={selected ? "visible" : "hidden"}>
                 <div ref={menuRef} className="p-[5px] flex flex-col items-center rounded-md min-w-48 bg-card">
                     <UserActionButton>

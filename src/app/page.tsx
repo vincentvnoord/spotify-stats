@@ -22,7 +22,7 @@ export default async function Home() {
       </div>
       <div className="w-full p-6">
         <div className="h-auto min-h-[300px] md:min-h-[500px] 2xl:min-h-[800px] lg:p-9 w-full relative overflow-hidden">
-          <Image className="object-contain" src="/landingpage.png" alt="avatar" fill />
+          <Image loading="eager" className="object-contain" src="/landingpage.png" alt="avatar" fill />
         </div>
       </div>
     </main>
