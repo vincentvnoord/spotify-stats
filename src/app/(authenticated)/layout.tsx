@@ -15,12 +15,9 @@ export default async function AuthLayout({
     }
 
     return (
-        <div className="p-6 max-w-screen-lg flex w-full flex-col gap-3">
-            <Header />
+        <div className="p-6 flex justify-center items-center w-full flex-col gap-3">
             <SessionPage>
-                <section className="bg-background w-full rounded-lg md:p-3">
                     {children}
-                </section>
             </SessionPage>
         </div>
     );

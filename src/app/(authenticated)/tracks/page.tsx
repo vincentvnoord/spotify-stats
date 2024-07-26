@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { TrackList } from "@/components/tracks/TrackList";
 import { SessionPage } from "@/components/SessionPage";
 import { PageHeader } from "@/components/PageHeader";
+import { MainContent } from "@/components/ui/Containers";
 
 
 export default async function TracksPage({ searchParams }: { searchParams: { timeRange?: string } }) {
@@ -14,13 +15,15 @@ export default async function TracksPage({ searchParams }: { searchParams: { tim
     }
 
     return (
-        <main className="w-full relative h-full flex flex-col gap-3 p-3">
-            <PageHeader title="TRACKS" />
-            <div className="h-0.5 w-full bg-secondary"></div>
+        <main className="w-full relative h-full flex justify-center gap-3 p-3">
+            <MainContent>
+                <PageHeader title="TRACKS" />
+                <div className="h-0.5 w-full bg-secondary"></div>
 
-            <SessionPage>
-                <TrackList />
-            </SessionPage>
+                <SessionPage>
+                    <TrackList />
+                </SessionPage>
+            </MainContent>
         </main>
     );
 }

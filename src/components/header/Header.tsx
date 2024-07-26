@@ -21,7 +21,7 @@ export const Header = async () => {
     }
 
     return (
-        <header className="flex bg-background rounded-lg items-center justify-between p-4">
+        <header className="flex bg-background w-full max-w-screen-lg rounded-lg items-center justify-between p-4">
             <div className="md:hidden">
                 <button >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

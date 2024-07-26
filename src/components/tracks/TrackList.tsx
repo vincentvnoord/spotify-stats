@@ -6,7 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import { getTopTracks } from "@/lib/spotify";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { motion, useInView, Variants } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { SpotifyLink } from "@/components/ui/SpotifyLink";
+import Link from "next/link";
 
 const cache = new Map<string, { list: BasicTrackInfo[], date: Date }>();
 
@@ -60,7 +62,7 @@ export const TrackList = () => {
     )
 }
 
-const TrackCard = ({ name, ranking, artists, image }: BasicTrackInfo) => {
+const TrackCard = ({ name, ranking, artists, image, public_url }: BasicTrackInfo) => {
     const [hovered, setHovered] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref);
@@ -91,7 +93,9 @@ const TrackCard = ({ name, ranking, artists, image }: BasicTrackInfo) => {
                 </div>
             </div>
 
-            <SpotifyLink hovered={hovered} />
+            <Link href={public_url || ""}>
+                <SpotifyLink hovered={hovered} />
+            </Link>
         </motion.div >
     )
 }
@@ -110,26 +114,5 @@ const LoadingCard = ({ index }: { index: number }) => {
                 className="absolute w-full h-full rounded-md bottom-0 left-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
             ></motion.div>
         </div>
-    )
-}
-
-const SpotifyLink = ({ hovered }: { hovered: boolean }) => {
-    const variants: Variants = {
-        hidden: {
-            opacity: 0,
-            x: "-100%"
-        },
-        visible: {
-            opacity: 1,
-            x: 0,
-        }
-    }
-
-    return (
-        <motion.div variants={variants} animate={hovered ? "visible" : "hidden"} initial="hidden">
-            <div className="h-full flex items-center">
-                <Image src="/spotify-icon.svg" alt="spotify" width={30} height={30} />
-            </div>
-        </motion.div>
     )
 }
