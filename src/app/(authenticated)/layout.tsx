@@ -15,7 +15,7 @@ export default async function AuthLayout({
     }
 
     return (
-        <div className="p-6 flex justify-center items-center w-full flex-col gap-3">
+        <div className="flex justify-center items-center w-full flex-col gap-3">
             <SessionPage>
                     {children}
             </SessionPage>

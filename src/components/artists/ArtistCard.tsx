@@ -1,18 +1,33 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useInView, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { BasicArtistInfo } from "@/types/spotify";
 import { SpotifyLink } from "../ui/SpotifyLink";
+import SelectedArtistContext from "./SelectedArtistContext";
 
 export const ArtistCard = ({ className, artist }: { className?: string, artist: BasicArtistInfo }) => {
-    const { name, ranking, image, public_url } = artist;
+    const { name, ranking, image, public_url, id } = artist;
+    const { setSelectedArtist } = useContext(SelectedArtistContext);
     const ref = useRef<HTMLDivElement>(null);
     const [hovered, setHovered] = useState(false);
     const isInView = useInView(ref);
 
+    const onClick = () => {
+        setSelectedArtist(id);
+    }
+
+    let backgroundCol = "bg-card";
+    if (ranking === 1)
+        backgroundCol = "bg-yellow-500";
+    if (ranking === 2)
+        backgroundCol = "bg-gray-400";
+    if (ranking === 3)
+        backgroundCol = "bg-yellow-900";
+
     return (
         <motion.div
+            onClick={onClick}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             ref={ref}
@@ -27,7 +42,7 @@ export const ArtistCard = ({ className, artist }: { className?: string, artist: 
 
             <Ranking ranking={ranking} />
 
-            <motion.div animate={hovered ? { opacity: 1 } : { opacity: 0 }} className="bg-card w-full h-full absolute"></motion.div>
+            <motion.div animate={hovered ? { opacity: 1 } : { opacity: 0 }} className={`${backgroundCol} rounded-2xl w-full h-full absolute`}></motion.div>
 
             <ArtistPublicLink public_url={public_url} name={name} cardHovered={hovered} />
         </motion.div>

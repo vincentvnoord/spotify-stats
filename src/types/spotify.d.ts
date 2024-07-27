@@ -8,6 +8,7 @@ export type BasicTrackInfo = {
 }
 
 export type BasicArtistInfo = {
+    id: string;
     name: string;
     ranking: number;
     image: string;
@@ -15,6 +16,7 @@ export type BasicArtistInfo = {
 }
 
 export type FullArtistInfo = {
+    id: string;
     name: string;
     images: { url: string }[];
     followers: number;

@@ -31,15 +31,16 @@ export const PopularSongs = ({ songs }: { songs: BasicTrackInfo[] }) => {
     )
 };
 
-const PopularSong = ({ song }: { song: BasicArtistInfo }) => {
+const PopularSong = ({ song }: { song: BasicTrackInfo }) => {
     const [hovered, setHovered] = useState(false);
     const { name, ranking, image, public_url } = song;
+    const delayMultplier = ranking > 5 ? ranking - 5 : ranking;
 
     return (
         <motion.div
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            initial={{ y: "-100%", opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="flex cursor-pointer justify-between items-center gap-4">
+            initial={{ y: "-100%", opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: delayMultplier * 0.05 }} className="flex cursor-pointer justify-between items-center gap-4">
             <div className="flex items-center gap-2">
                 <p className="text-foreground min-w-5 text-center">{ranking}</p>
                 <Image className="aspect-square rounded-lg object-cover" src={image} alt={name} width={40} height={40} />

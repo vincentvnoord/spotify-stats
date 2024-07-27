@@ -11,7 +11,7 @@ import { ArtistCard, LoadingCard } from "./ArtistCard";
 
 const cache = new Map<string, { list: BasicArtistInfo[], date: Date }>();
 
-export const ArtistsPage = () => {
+export const ArtistsGrid = () => {
     const [topArtists, setTopArtists] = useState<BasicArtistInfo[]>([]);
     const [loading, setLoading] = useState(false);
     const session = useSession();

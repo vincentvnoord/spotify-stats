@@ -62,6 +62,7 @@ export async function getTopArtists(accessToken: string, timeRange: string): Pro
         const data = await response.json();
         artists = data.items.map((artist: any, index: number) => {
             return {
+                id: artist.id,
                 name: artist.name,
                 ranking: index + 1,
                 image: artist.images[0].url,
@@ -106,6 +107,7 @@ export async function getArtistData(accessToken: string, id: string): Promise<Fu
     if (basicData.ok) {
         const data = await basicData.json();
         artist = {
+            id: data.id,
             name: data.name,
             images: data.images,
             followers: data.followers.total,

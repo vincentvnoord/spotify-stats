@@ -1,24 +1,38 @@
+"use client";
+
 import { getSession } from "@/auth";
 import Image from "next/image"
 import Link from "next/link"
 import { getUserData } from "@/lib/spotify";
-import React from "react";
+import React, { useEffect } from "react";
 import UserInfo, { UserProps } from "./User";
+import { useSession } from "next-auth/react";
 
-export const Header = async () => {
-    const session = await getSession();
+export const Header = () => {
+    const session = useSession();
+    const [user, setUser] = React.useState<UserProps | null>(null);
 
-    const user = await getUserData(session?.accessToken as string);
-    let avatar = "";
-    if (user.images.length > 0) {
-        avatar = user.images[0].url;
-    }
-    console.log(user);
+    useEffect(() => {
+        const fetchUser = async () => {
+            if (!session.data?.accessToken) return;
+            const user = await getUserData(session.data?.accessToken as string);
+            let avatar = "";
+            if (user.images.length > 0) {
+                avatar = user.images[0].url;
+            }
 
-    const userInfo: UserProps = {
-        display_name: user.display_name,
-        images: user.images
-    }
+            const userInfo: UserProps = {
+                display_name: user.display_name,
+                images: user.images,
+            }
+
+            setUser(userInfo);
+        };
+
+        fetchUser();
+    }, [session]);
+
+    if (!user) return null;
 
     return (
         <header className="flex bg-background w-full max-w-screen-lg rounded-lg items-center justify-between p-4">
@@ -41,7 +55,7 @@ export const Header = async () => {
                 </nav>
             </div>
 
-            <UserInfo {...userInfo} />
+            <UserInfo {...user} />
         </header>
     )
 }
