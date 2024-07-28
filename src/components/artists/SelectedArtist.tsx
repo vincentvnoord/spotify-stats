@@ -7,11 +7,12 @@ import { use, useContext, useEffect, useState } from "react";
 import SelectedArtistContext from "./SelectedArtistContext";
 import { getArtistData } from "@/lib/spotify";
 import { useSession } from "next-auth/react";
+import { XIcon } from "lucide-react";
 
 export const SelectedArtist = () => {
     const [artistData, setArtistData] = useState<FullArtistInfo | null>(null);
     const session = useSession();
-    const { selectedArtist } = useContext(SelectedArtistContext);
+    const { selectedArtist, setSelectedArtist } = useContext(SelectedArtistContext);
 
     useEffect(() => {
         const fetchArtist = async () => {
@@ -26,6 +27,7 @@ export const SelectedArtist = () => {
     }, [selectedArtist]);
 
     if (!artistData) return null;
+    if (!selectedArtist) return null;
 
     const image = artistData.images[1].url ?? artistData.images[0].url;
 
@@ -39,6 +41,11 @@ export const SelectedArtist = () => {
                 <div className="absolute z-10 w-full top-0 left-0 h-full bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl">
                 </div>
                 <Image src={image ?? "/songtest.png"} alt="meh" fill className="object-cover absolute -z-0 rounded-b-3xl" />
+                <div className="absolute z-50 top-0 right-0 p-3">
+                    <button onClick={() => { setSelectedArtist(null); setArtistData(null); }} className="bg-background hover:bg-card rounded-full p-2">
+                        <XIcon size={20} />
+                    </button>
+                </div>
             </div>
             <div className="overflow-scroll">
                 <PopularSongs songs={artistData.topTracks ?? []} />

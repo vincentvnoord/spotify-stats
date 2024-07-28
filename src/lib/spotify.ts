@@ -1,3 +1,4 @@
+import { UserProps } from "@/components/header/User";
 import { BasicTrackInfo, BasicArtistInfo, FullArtistInfo } from "@/types/spotify";
 
 export const spotifyAPI = "https://api.spotify.com/v1";
@@ -12,12 +13,20 @@ export const getSpotifyClientSecret = () => {
     return process.env.SPOTIFY_CLIENT_SECRET;
 }
 
-export async function getUserData(accessToken: string) {
+export async function getUserData(accessToken: string): Promise<UserProps> {
     const response = await fetch('https://api.spotify.com/v1/me', {
         headers: {
             Authorization: `Bearer ${accessToken}`
         }
     });
+
+    if (response.ok) {
+        const data = await response.json();
+        return {
+            display_name: data.display_name,
+            images: data.images,
+        }
+    }
 
     return response.json();
 }

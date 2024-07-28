@@ -8,31 +8,7 @@ import React, { useEffect } from "react";
 import UserInfo, { UserProps } from "./User";
 import { useSession } from "next-auth/react";
 
-export const Header = () => {
-    const session = useSession();
-    const [user, setUser] = React.useState<UserProps | null>(null);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            if (!session.data?.accessToken) return;
-            const user = await getUserData(session.data?.accessToken as string);
-            let avatar = "";
-            if (user.images.length > 0) {
-                avatar = user.images[0].url;
-            }
-
-            const userInfo: UserProps = {
-                display_name: user.display_name,
-                images: user.images,
-            }
-
-            setUser(userInfo);
-        };
-
-        fetchUser();
-    }, [session]);
-
-    if (!user) return null;
+export const Header = ({ user }: { user: UserProps }) => {
 
     return (
         <header className="flex bg-background w-full max-w-screen-lg rounded-lg items-center justify-between p-4">

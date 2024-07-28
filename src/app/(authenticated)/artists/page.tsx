@@ -2,6 +2,7 @@ import React from "react";
 import { getSession } from "@/auth";
 import { redirect } from "next/navigation";
 import ArtistsPage from "@/components/artists/ArtistsPage";
+import { getUserData } from "@/lib/spotify";
 
 
 export default async function Artists({ searchParams }: { searchParams: { timeRange?: string } }) {
@@ -10,9 +11,11 @@ export default async function Artists({ searchParams }: { searchParams: { timeRa
         redirect("/");
     }
 
+    const user = await getUserData(session.accessToken);
+
     return (
-        <main className="w-full relative h-full flex justify-center gap-3">
-            <ArtistsPage />
+        <main className="w-full relative h-full flex justify-center">
+            <ArtistsPage user={user} />
         </main>
     );
 }
