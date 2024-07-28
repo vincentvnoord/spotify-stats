@@ -47,7 +47,7 @@ export const SelectedArtist = () => {
                     </button>
                 </div>
             </div>
-            <div className="overflow-scroll">
+            <div className="overflow-scroll w-full">
                 <PopularSongs songs={artistData.topTracks ?? []} />
             </div>
         </>
