@@ -1,5 +1,5 @@
-import { UserProps } from "@/components/header/User";
 import { BasicTrackInfo, BasicArtistInfo, FullArtistInfo } from "@/types/spotify";
+import { UserProps } from "@/components/user/UserClient";
 
 export const spotifyAPI = "https://api.spotify.com/v1";
 
@@ -31,8 +31,8 @@ export async function getUserData(accessToken: string): Promise<UserProps> {
     return response.json();
 }
 
-export async function getTopTracks(accessToken: string, timeRange: string): Promise<BasicTrackInfo[]> {
-    const response = await fetch(`${spotifyAPI}/me/top/tracks?time_range=${timeRange}&limit=50`, {
+export async function getTopTracks(accessToken: string, timeRange: string, limit: number = 50): Promise<BasicTrackInfo[]> {
+    const response = await fetch(`${spotifyAPI}/me/top/tracks?time_range=${timeRange}&limit=${limit}`, {
         headers: {
             Authorization: `Bearer ${accessToken}`
         }
@@ -57,9 +57,8 @@ export async function getTopTracks(accessToken: string, timeRange: string): Prom
     return tracks;
 }
 
-
-export async function getTopArtists(accessToken: string, timeRange: string): Promise<BasicArtistInfo[]> {
-    const response = await fetch(`${spotifyAPI}/me/top/artists?time_range=${timeRange}&limit=50`, {
+export async function getTopArtists(accessToken: string, timeRange: string, limit: number = 50): Promise<BasicArtistInfo[]> {
+    const response = await fetch(`${spotifyAPI}/me/top/artists?time_range=${timeRange}&limit=${limit}`, {
         headers: {
             Authorization: `Bearer ${accessToken}`
         }

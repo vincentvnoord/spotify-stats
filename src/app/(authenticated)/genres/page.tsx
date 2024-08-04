@@ -14,9 +14,7 @@ export default async function Artists({ searchParams }: { searchParams: { timeRa
 
     return (
         <>
-            <PageHeader title="ARTISTS" />
-            <div className="h-0.5 w-full bg-secondary"></div>
-            <ArtistsGrid />
+            <h1>GENRES</h1>
         </>
     );
 }

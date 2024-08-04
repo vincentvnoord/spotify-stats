@@ -1,6 +1,6 @@
 import { getSession } from "@/auth";
-import { Header } from "@/components/header/Header";
-import { SessionPage } from "@/components/SessionPage";
+import AuthLayoutContext from "@/components/AuthLayoutContext";
+import Menu from "@/components/menu/Menu";
 import { redirect } from "next/navigation";
 
 
@@ -15,10 +15,10 @@ export default async function AuthLayout({
     }
 
     return (
-        <div className="flex justify-center items-center w-full flex-col gap-3">
-            <SessionPage>
-                    {children}
-            </SessionPage>
+        <div className="flex justify-center items-center w-full">
+            <AuthLayoutContext menu={<Menu />}>
+                {children}
+            </AuthLayoutContext>
         </div>
     );
 }

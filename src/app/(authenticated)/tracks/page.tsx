@@ -7,6 +7,7 @@ import { SessionPage } from "@/components/SessionPage";
 import { PageHeader } from "@/components/PageHeader";
 import { MainContent } from "@/components/ui/Containers";
 import { getUserData } from "@/lib/spotify";
+import { SideContent } from "@/components/artists/ArtistsPage";
 
 
 export default async function TracksPage({ searchParams }: { searchParams: { timeRange?: string } }) {
@@ -15,18 +16,11 @@ export default async function TracksPage({ searchParams }: { searchParams: { tim
         redirect("/");
     }
 
-    const user = await getUserData(session.accessToken ?? "");
-
     return (
-        <main className="w-full relative h-full flex justify-center gap-3 p-3">
-            <MainContent user={user}>
-                <PageHeader title="TRACKS" />
-                <div className="h-0.5 w-full bg-secondary"></div>
-
-                <SessionPage>
-                    <TrackList />
-                </SessionPage>
-            </MainContent>
-        </main>
+        <>
+            <PageHeader title="TRACKS" />
+            <div className="h-0.5 w-full bg-secondary"></div>
+            <TrackList />
+        </>
     );
 }

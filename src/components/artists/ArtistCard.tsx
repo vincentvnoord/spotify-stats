@@ -11,7 +11,7 @@ export const ArtistCard = ({ className, artist }: { className?: string, artist: 
     const { setSelectedArtist } = useContext(SelectedArtistContext);
     const ref = useRef<HTMLDivElement>(null);
     const [hovered, setHovered] = useState(false);
-    const isInView = useInView(ref);
+    const isInView = useInView(ref, { amount: 0.5 });
 
     const onClick = () => {
         setSelectedArtist(id);
@@ -23,7 +23,7 @@ export const ArtistCard = ({ className, artist }: { className?: string, artist: 
     if (ranking === 2)
         backgroundCol = "bg-gray-400";
     if (ranking === 3)
-        backgroundCol = "bg-yellow-900";
+        backgroundCol = "bg-yellow-700";
 
     return (
         <motion.div
@@ -56,7 +56,7 @@ const Ranking = ({ ranking }: { ranking: number }) => {
     if (ranking === 2)
         backgroundCol = "bg-gray-400";
     if (ranking === 3)
-        backgroundCol = "bg-yellow-900";
+        backgroundCol = "bg-yellow-700";
 
     return (
         <div className={`absolute top-0 z-10 left-0 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-center flex items-center justify-center aspect-square text-lg font-bold`}>

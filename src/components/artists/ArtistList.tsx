@@ -2,16 +2,18 @@
 
 import { BasicArtistInfo, BasicTrackInfo } from "@/types/spotify"
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { getTopArtists, getTopTracks } from "@/lib/spotify";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { motion, useInView, Variants } from "framer-motion";
 import { ArtistCard, LoadingCard } from "./ArtistCard";
+import SelectedArtistContext from "./SelectedArtistContext";
 
 const cache = new Map<string, { list: BasicArtistInfo[], date: Date }>();
 
 export const ArtistsGrid = () => {
+    const { setSelectedArtist } = useContext(SelectedArtistContext);
     const [topArtists, setTopArtists] = useState<BasicArtistInfo[]>([]);
     const [loading, setLoading] = useState(false);
     const session = useSession();
@@ -40,6 +42,7 @@ export const ArtistsGrid = () => {
             setLoading(true);
             const artists = await getTopArtists(session.data?.accessToken as string, timeFrame);
             cache.set(timeFrame, { list: artists, date: new Date() });
+            setSelectedArtist(artists[0].id);
             setLoading(false);
             setTopArtists(artists);
         };

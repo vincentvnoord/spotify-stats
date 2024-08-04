@@ -75,7 +75,7 @@ const TrackCard = ({ name, ranking, artists, image, public_url }: BasicTrackInfo
             transition={{ duration: 0.3, ease: "easeInOut" }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            className={`flex justify-between items-center p-3 rounded-lg ${hovered ? "bg-card" : ""}`}
+            className={`flex w-full justify-between items-center p-3 rounded-lg ${hovered ? "bg-card" : ""}`}
         >
             <div className="flex gap-4 items-center">
                 <p className="text-xl min-w-9 text-center text-secondary">{ranking}</p>

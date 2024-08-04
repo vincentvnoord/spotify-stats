@@ -3,7 +3,7 @@
 import { FullArtistInfo } from "@/types/spotify";
 import { PopularSongs } from "./PopularSongs";
 import Image from "next/image";
-import { use, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SelectedArtistContext from "./SelectedArtistContext";
 import { getArtistData } from "@/lib/spotify";
 import { useSession } from "next-auth/react";
@@ -47,7 +47,7 @@ export const SelectedArtist = () => {
                     </button>
                 </div>
             </div>
-            <div className="overflow-scroll w-full">
+            <div className="overflow-scroll w-full overflow-x-clip">
                 <PopularSongs songs={artistData.topTracks ?? []} />
             </div>
         </>

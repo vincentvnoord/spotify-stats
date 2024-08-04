@@ -1,15 +1,13 @@
 import React from "react"
-import { Header } from "../header/Header"
-import { UserProps } from "../header/User"
 
-export const MainContent = ({ children, user }: { children: React.ReactNode, user: UserProps }) => {
+export const MainContent = ({ children }: { children: React.ReactNode }) => {
 
     return (
-        <div className="w-full flex h-full max-h-dvh p-6">
-            <div className="overflow-scroll overflow-x-hidden h-full flex-col gap-3 max-w-screen-lg bg-background rounded-2xl p-3">
-                <Header user={user} />
+        <div className="w-full flex h-dvh max-h-dvh xl:p-6">
+            <div className="overflow-scroll overflow-x-hidden w-full h-full flex-col gap-3 bg-background xl:rounded-2xl p-3">
                 {children}
             </div>
         </div>
     )
 }
+

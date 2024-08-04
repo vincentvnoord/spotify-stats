@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { UserActions } from './UserActions';
 import { useEffect, useRef, useState } from 'react';
 import { motion, Variants } from 'framer-motion';
+import { EllipsisVertical } from 'lucide-react';
 
 export type UserProps = {
     display_name: string;
@@ -37,20 +38,25 @@ const UserInfo = ({ display_name, images }: UserProps) => {
     }, [selected]);
 
     return (
-        <div className="flex gap-2 items-center relative">
+        <div className="flex justify-between w-full gap-2 items-center relative">
+            <div
+                className="flex gap-2 items-center"
+            >
+                <div className="relative bg-card rounded-full overflow-hidden w-10 h-10 object-contain">
+                    <Image src={avatar} fill alt="avatar" />
+                </div>
+                <p className={`text-lg hidden md:block font-medium`}>{display_name}</p>
+            </div>
+            <UserActions menuRef={menuRef} selected={selected} />
+
             <div
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 onClick={() => { setSelected(!selected) }}
                 className="flex gap-2 cursor-pointer items-center"
             >
-                <p className={`text-lg hidden md:block font-medium ${hovered ? "underline" : ""}`}>{display_name}</p>
-                <div className="relative bg-card rounded-full overflow-hidden w-10 h-10 md:w-12 md:h-12 object-contain">
-                    <Image src={avatar} fill alt="avatar" />
-                </div>
-
+                <EllipsisVertical size={24} />
             </div>
-            <UserActions menuRef={menuRef} selected={selected} />
         </div>
     )
 }

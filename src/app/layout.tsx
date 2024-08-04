@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html className="w-full flex justify-center min-h-screen" lang="en">
-      <body className={`${inter.className} bg-black flex text-white justify-center h-full w-full`}>
+      <body className={`${inter.className} bg-black flex text-white justify-center h-full w-full scrollbar-thin scrollbar-webkit scrollbar`}>
         {children}
       </body>
     </html>

@@ -9,43 +9,41 @@ import { FullArtistInfo } from "@/types/spotify";
 import React, { useContext, useState } from "react";
 import { ArtistsGrid } from "./ArtistList";
 import SelectedArtistProvider from "./SelectedArtistProvider";
-import { UserProps } from "../header/User";
+import { UserProps } from "../user/UserClient";
 import SelectedArtistContext from "./SelectedArtistContext";
 
-export default function ArtistsPage({ user }: { user: UserProps }) {
-    const { selectedArtist, setSelectedArtist } = useContext(SelectedArtistContext);
+export default function ArtistsPage({ }: {}) {
 
     return (
         <>
             <SelectedArtistProvider>
-                <div className="w-full max-w-96 hidden xl:block">
+                    <SideContent />
+                    <div className="w-full">
+                        <MainContent>
+                            <div className="flex w-full flex-col gap-4 md:p-6">
+                                <PageHeader title="ARTISTS" />
+                                <div className="h-0.5 w-full bg-secondary"></div>
+                                <ArtistsGrid />
+                            </div>
+                        </MainContent>
+                    </div>
 
-                </div>
-                <div className="">
-                    <MainContent user={user}>
-                        <div className="flex flex-col gap-4 md:p-6">
-                            <PageHeader title="ARTISTS" />
-                            <div className="h-0.5 w-full bg-secondary"></div>
-                            <ArtistsGrid />
-                        </div>
-                    </MainContent>
-                </div>
-
-                <SideContent>
-                    <SelectedArtist />
-                </SideContent>
+                    <SideContent>
+                        <SelectedArtist />
+                    </SideContent>
             </SelectedArtistProvider >
         </>
     )
 }
 
-const SideContent = ({ children }: { children: React.ReactNode }) => {
+export const SideContent = ({ children, className }: { children?: React.ReactNode, className?: string }) => {
     const { selectedArtist, setSelectedArtist } = useContext(SelectedArtistContext);
     const defaultStyle = "absolute h-full z-30 w-full xl:p-6 xl:pl-0 top-0 flex flex-col items-center xl:max-w-[400px] xl:sticky xl:max-h-screen";
 
     return (
-        <div className={`${defaultStyle} ${selectedArtist ? "pointer-events-all bg-black/50" : "pointer-events-none"}`}>
-            <div className="sticky top-0 p-6 max-h-screen flex flex-col items-center w-full h-full xl:p-0">
+        <div className={`${defaultStyle} ${selectedArtist ? "pointer-events-all" : "pointer-events-none"} ${className}`}>
+            <div className={`absolute transition-all duration-200 ease-in z-10 inset-0 ${selectedArtist ? "pointer-events-all backdrop-blur-md" : "pointer-events-none"}`}></div>
+            <div className="sticky z-30 top-0 p-3 max-h-screen flex flex-col items-center w-full h-full xl:p-0">
                 <div className="rounded-2xl w-full items-start flex flex-col bg-background overflow-hidden max-w-[600px] xl:max-w-[400px]">
                     {children}
                 </div>
