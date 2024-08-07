@@ -15,7 +15,7 @@ export default async function AuthLayout({
     }
 
     return (
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-start w-full">
             <AuthLayoutContext menu={<Menu />}>
                 {children}
             </AuthLayoutContext>

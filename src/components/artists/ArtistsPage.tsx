@@ -17,20 +17,20 @@ export default function ArtistsPage({ }: {}) {
     return (
         <>
             <SelectedArtistProvider>
-                    <SideContent />
-                    <div className="w-full">
-                        <MainContent>
-                            <div className="flex w-full flex-col gap-4 md:p-6">
-                                <PageHeader title="ARTISTS" />
-                                <div className="h-0.5 w-full bg-secondary"></div>
-                                <ArtistsGrid />
-                            </div>
-                        </MainContent>
-                    </div>
+                <SideContent />
+                <div className="w-full">
+                    <MainContent>
+                        <div className="flex w-full flex-col gap-4 md:p-6">
+                            <PageHeader title="ARTISTS" />
+                            <div className="h-0.5 w-full bg-secondary"></div>
+                            <ArtistsGrid />
+                        </div>
+                    </MainContent>
+                </div>
 
-                    <SideContent>
-                        <SelectedArtist />
-                    </SideContent>
+                <SideContent>
+                    <SelectedArtist />
+                </SideContent>
             </SelectedArtistProvider >
         </>
     )
@@ -39,6 +39,8 @@ export default function ArtistsPage({ }: {}) {
 export const SideContent = ({ children, className }: { children?: React.ReactNode, className?: string }) => {
     const { selectedArtist, setSelectedArtist } = useContext(SelectedArtistContext);
     const defaultStyle = "absolute h-full z-30 w-full xl:p-6 xl:pl-0 top-0 flex flex-col items-center xl:max-w-[400px] xl:sticky xl:max-h-screen";
+
+    if (!selectedArtist) return null;
 
     return (
         <div className={`${defaultStyle} ${selectedArtist ? "pointer-events-all" : "pointer-events-none"} ${className}`}>

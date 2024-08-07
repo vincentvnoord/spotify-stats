@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useContext, useEffect, useRef, useState } from "react";
 import { getTopArtists, getTopTracks } from "@/lib/spotify";
 import { useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { motion, useInView, Variants } from "framer-motion";
 import { ArtistCard, LoadingCard } from "./ArtistCard";
 import SelectedArtistContext from "./SelectedArtistContext";
@@ -15,14 +15,29 @@ const cache = new Map<string, { list: BasicArtistInfo[], date: Date }>();
 export const ArtistsGrid = () => {
     const { setSelectedArtist } = useContext(SelectedArtistContext);
     const [topArtists, setTopArtists] = useState<BasicArtistInfo[]>([]);
+    const [initialLoad, setInitialLoad] = useState(true);
     const [loading, setLoading] = useState(false);
     const session = useSession();
     const searchParams = useSearchParams();
+    const pathName = usePathname();
     const timeFrame = searchParams.get("timeRange") || "short_term";
 
     console.log(topArtists[0]);
 
     useEffect(() => {
+        const handleArtistSelect = (id: string | null = null) => {
+            if ((initialLoad && window.innerWidth > 1280) || !initialLoad) {
+                if (id) {
+                    setSelectedArtist(id);
+                } else {
+                    if (topArtists.length <= 0)
+                        return;
+
+                    setSelectedArtist(topArtists[0].id);
+                }
+            }
+        }
+
         const fetchTopTracks = async () => {
             if (!session.data?.accessToken) {
                 return;
@@ -33,6 +48,7 @@ export const ArtistsGrid = () => {
                 if (tracks.length > 0) {
                     const date = cache.get(timeFrame)?.date;
                     if (date && (new Date().getTime() - date.getTime()) < 1000 * 120) {
+                        handleArtistSelect(tracks[0].id);
                         setTopArtists(tracks);
                         return;
                     }
@@ -42,13 +58,17 @@ export const ArtistsGrid = () => {
             setLoading(true);
             const artists = await getTopArtists(session.data?.accessToken as string, timeFrame);
             cache.set(timeFrame, { list: artists, date: new Date() });
-            setSelectedArtist(artists[0].id);
+
+            handleArtistSelect(artists[0].id);
+
             setLoading(false);
+            setInitialLoad(false);
             setTopArtists(artists);
         };
 
         fetchTopTracks();
-    }, [timeFrame, session.data?.accessToken]);
+        handleArtistSelect();
+    }, [timeFrame, session.data?.accessToken, pathName]);
 
     return (
         <div className="w-full self-center">

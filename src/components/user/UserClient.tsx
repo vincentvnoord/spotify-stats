@@ -14,7 +14,7 @@ export type UserProps = {
 }
 
 const UserInfo = ({ display_name, images }: UserProps) => {
-    const avatar = images.length > 0 ? images[0].url : "";
+    const avatar = images?.length > 0 ? images[0].url : null;
     const [selected, setSelected] = useState(false);
     const [hovered, setHovered] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
@@ -43,9 +43,9 @@ const UserInfo = ({ display_name, images }: UserProps) => {
                 className="flex gap-2 items-center"
             >
                 <div className="relative bg-card rounded-full overflow-hidden w-10 h-10 object-contain">
-                    <Image src={avatar} fill alt="avatar" />
+                    {avatar && <Image src={avatar} fill alt="avatar" />}
                 </div>
-                <p className={`text-lg hidden md:block font-medium`}>{display_name}</p>
+                <p className={`text-lg font-medium`}>{display_name}</p>
             </div>
             <UserActions menuRef={menuRef} selected={selected} />
 

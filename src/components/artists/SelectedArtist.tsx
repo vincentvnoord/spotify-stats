@@ -24,6 +24,7 @@ export const SelectedArtist = () => {
         }
 
         fetchArtist();
+
     }, [selectedArtist]);
 
     if (!artistData) return null;
