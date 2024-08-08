@@ -15,7 +15,7 @@ export default async function AuthLayout({
     }
 
     return (
-        <div className="flex gap-2 justify-center items-start w-full">
+        <div className="flex h-dvh gap-2 justify-center items-start w-full">
             <AuthLayoutContext menu={<Menu />}>
                 {children}
             </AuthLayoutContext>

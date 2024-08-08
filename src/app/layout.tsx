@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="w-full flex justify-center min-h-screen" lang="en">
-      <body className={`${inter.className} bg-black flex text-white justify-center h-full w-full scrollbar-thin scrollbar-webkit scrollbar`}>
+    <html className="w-full flex justify-center h-dvh" lang="en">
+      <body className={`${inter.className} bg-black flex text-white justify-center h-dvh w-full scrollbar-thin scrollbar-webkit scrollbar`}>
         {children}
       </body>
     </html>

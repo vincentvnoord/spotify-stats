@@ -52,8 +52,8 @@ export const ClientMenu = ({ images, userUI }: { images: string[], userUI: React
     }
 
     return (
-        <div className={`w-full transition-all duration-200 ease-in ${menuOpen ? "backdrop-blur-sm" : null} h-full xl:h-fit justify-end items-center flex flex-col gap-2 overflow-hidden xl:max-w-[400px]`}>
-            <motion.div ref={menuRef} initial="closed" animate={menuOpen ? "open" : "closed"} variants={variants} className="w-full overflow-hidden pointer-events-auto gap-3 flex-col bg-background p-3 rounded-lg">
+        <div className={`w-full h-dvh transition-all duration-200 ease-in ${menuOpen ? "backdrop-blur-sm" : null} xl:h-fit justify-end items-between flex flex-col gap-2 overflow-hidden xl:max-w-[400px]`}>
+            <motion.div ref={menuRef} initial="closed" animate={menuOpen ? "open" : "closed"} variants={variants} className="w-full h-full overflow-hidden pointer-events-auto gap-3 flex-col bg-background p-3 rounded-lg">
                 <div className="flex flex-col">
                     <div className="flex items-center">
                         <BarChartIcon size={24} />
