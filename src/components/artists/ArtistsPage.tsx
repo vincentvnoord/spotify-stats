@@ -45,8 +45,8 @@ export const SideContent = ({ children, className }: { children?: React.ReactNod
     return (
         <div className={`${defaultStyle} ${selectedArtist ? "pointer-events-all" : "pointer-events-none"} ${className}`}>
             <div className={`absolute transition-all duration-200 ease-in z-10 inset-0 ${selectedArtist ? "pointer-events-all backdrop-blur-md" : "pointer-events-none"}`}></div>
-            <div className="sticky z-30 top-0 p-3 max-h-screen flex flex-col items-center w-full h-full xl:p-0">
-                <div className="rounded-2xl w-full items-start flex flex-col bg-background overflow-hidden max-w-[600px] xl:max-w-[400px]">
+            <div className="sticky z-30 top-0 p-3 flex flex-col items-center w-full h-full xl:p-0">
+                <div className="rounded-lg w-full items-start flex flex-col bg-background overflow-hidden max-w-[600px] xl:max-w-[400px]">
                     {children}
                 </div>
             </div>

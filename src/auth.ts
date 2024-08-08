@@ -76,6 +76,8 @@ export const authOptions: NextAuthOptions = {
         async session({ session, token }): Promise<Session> {
             session.accessToken = token.accessToken;
             session.error = token.error;
+            session.refreshToken = token.refreshToken;
+
             return session;
         },
     },

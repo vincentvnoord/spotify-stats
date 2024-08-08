@@ -5,6 +5,7 @@ import NavElement from "./NavElement"
 import { BarChartIcon, LibraryIcon } from "lucide-react"
 import { motion, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export const ClientMenu = ({ images, userUI }: { images: string[], userUI: React.ReactNode }) => {
     const [menuOpen, setMenuOpen] = useState(true);
@@ -51,8 +52,8 @@ export const ClientMenu = ({ images, userUI }: { images: string[], userUI: React
     }
 
     return (
-        <div className={`w-full transition-all duration-200 ease-in ${menuOpen ? "backdrop-blur-sm" : null} h-full xl:h-fit justify-end items-center flex flex-col gap-1 overflow-hidden xl:max-w-[400px]`}>
-            <motion.div ref={menuRef} initial="closed" animate={menuOpen ? "open" : "closed"} variants={variants} className="w-full overflow-hidden pointer-events-auto gap-3 flex-col bg-background p-3 rounded-2xl">
+        <div className={`w-full transition-all duration-200 ease-in ${menuOpen ? "backdrop-blur-sm" : null} h-full xl:h-fit justify-end items-center flex flex-col gap-2 overflow-hidden xl:max-w-[400px]`}>
+            <motion.div ref={menuRef} initial="closed" animate={menuOpen ? "open" : "closed"} variants={variants} className="w-full overflow-hidden pointer-events-auto gap-3 flex-col bg-background p-3 rounded-lg">
                 <div className="flex flex-col">
                     <div className="flex items-center">
                         <BarChartIcon size={24} />
@@ -73,9 +74,16 @@ export const ClientMenu = ({ images, userUI }: { images: string[], userUI: React
                     </nav>
                 </div>
             </motion.div>
-            <motion.div ref={menuRef} initial="closed" animate={menuOpen ? "open" : "closed"} variants={variants} className="w-full overflow-hidden pointer-events-auto gap-3 flex-col bg-background p-3 rounded-2xl">
+            <motion.div ref={menuRef} initial="closed" animate={menuOpen ? "open" : "closed"} variants={variants} className="w-full overflow-hidden pointer-events-auto gap-3 flex-col bg-background p-3 rounded-lg">
                 {userUI}
-                <div className="w-full h-96"></div>
+                <div className="w-full h-96">
+                    <div className="w-full flex gap-2 items-center">
+                        <div className="w-12 h-12 relative overflow-hidden">
+                            <Image className="object-cover" src="/songtest.png" fill alt="currentsong" />
+                        </div>
+                        <p>Song title</p>
+                    </div>
+                </div>
             </motion.div>
             <div className="flex bg-gradient-to-t from-black/60 to-transparent pointer-events-auto xl:hidden p-3 pb-5 justify-around w-full">
                 <LibraryIcon size={24} />

@@ -1,5 +1,6 @@
 import { BasicTrackInfo, BasicArtistInfo, FullArtistInfo } from "@/types/spotify";
 import { UserProps } from "@/components/user/UserClient";
+import { Session } from "next-auth";
 
 export const spotifyAPI = "https://api.spotify.com/v1";
 
@@ -26,6 +27,8 @@ export async function getUserData(accessToken: string): Promise<UserProps> {
             display_name: data.display_name,
             images: data.images,
         }
+    } else if (!response.ok) {
+        throw new Error("Error fetching user data");
     }
 
     return response.json();
@@ -52,6 +55,8 @@ export async function getTopTracks(accessToken: string, timeRange: string, limit
                 public_url: track.external_urls.spotify
             }
         });
+    } else if (!response.ok) {
+        throw new Error("Error fetching top tracks");
     }
 
     return tracks;
@@ -77,6 +82,8 @@ export async function getTopArtists(accessToken: string, timeRange: string, limi
                 public_url: artist.external_urls.spotify
             }
         });
+    } else if (!response.ok) {
+        throw new Error("Error fetching top artists");
     }
 
     return artists;
@@ -102,6 +109,8 @@ export async function getArtistData(accessToken: string, id: string): Promise<Fu
                 public_url: track.external_urls.spotify
             }
         });
+    } else if (!topTracksRes.ok) {
+        throw new Error("Error fetching top tracks for artist");
     }
 
     const basicData = await fetch(`${spotifyAPI}/artists/${id}`, {
@@ -122,6 +131,8 @@ export async function getArtistData(accessToken: string, id: string): Promise<Fu
             topTracks: topTracks
         };
 
+    } else if (!basicData.ok) {
+        throw new Error("Error fetching artist data");
     }
 
     return artist;
