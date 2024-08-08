@@ -16,7 +16,7 @@ export default function AuthLayoutContext({ children, menu }: { children: React.
                         {menu}
                     </Navbar>
                     <MainContent>
-                        <div className="flex w-full flex-col gap-4 md:p-6">
+                        <div className="flex w-full h-full flex-col gap-4 md:p-6">
                             {children}
                         </div>
                     </MainContent>
