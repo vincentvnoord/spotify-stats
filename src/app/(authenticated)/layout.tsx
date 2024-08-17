@@ -1,6 +1,6 @@
 import { getSession } from "@/auth";
 import AuthLayoutContext from "@/components/AuthLayoutContext";
-import Menu from "@/components/menu/Menu";
+import Header from "@/components/Header";
 import { redirect } from "next/navigation";
 
 
@@ -15,8 +15,8 @@ export default async function AuthLayout({
     }
 
     return (
-        <div className="flex gap-2 justify-center items-start w-full">
-            <AuthLayoutContext menu={<Menu />}>
+        <div className="flex flex-col justify-start items-start h-full w-full max-h-dvh">
+            <AuthLayoutContext header={<Header />}>
                 {children}
             </AuthLayoutContext>
         </div>

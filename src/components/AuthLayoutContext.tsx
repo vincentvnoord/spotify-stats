@@ -7,23 +7,23 @@ import { SelectedArtist } from "@/components/artists/SelectedArtist";
 import { SessionProvider } from "next-auth/react";
 
 
-export default function AuthLayoutContext({ children, menu }: { children: React.ReactNode, menu: React.ReactNode }) {
+export default function AuthLayoutContext({ children, header }: { children: React.ReactNode, header: React.ReactNode }) {
     return (
         <>
             <SessionProvider>
                 <SelectedArtistProvider>
-                    <Navbar className="xl:pl-6 xl:pr-0" >
-                        {menu}
-                    </Navbar>
-                    <MainContent>
-                        <div className="flex w-full flex-col gap-4 md:p-6">
-                            {children}
-                        </div>
-                    </MainContent>
+                    {header}
+                    <div className="w-full h-full flex gap-2">
+                        <MainContent>
+                            <div className="flex w-full h-full flex-col gap-4 md:p-6">
+                                {children}
+                            </div>
+                        </MainContent>
 
-                    <SideContent>
-                        <SelectedArtist />
-                    </SideContent>
+                        <SideContent>
+                            <SelectedArtist />
+                        </SideContent>
+                    </div>
                 </SelectedArtistProvider >
             </SessionProvider>
         </>

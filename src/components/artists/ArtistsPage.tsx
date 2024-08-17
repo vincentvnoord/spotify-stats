@@ -18,7 +18,7 @@ export default function ArtistsPage({ }: {}) {
         <>
             <SelectedArtistProvider>
                 <SideContent />
-                <div className="w-full">
+                <div className="w-full h-full">
                     <MainContent>
                         <div className="flex w-full flex-col gap-4 md:p-6">
                             <PageHeader title="ARTISTS" />
