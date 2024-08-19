@@ -5,7 +5,7 @@ import { SideContent } from "@/components/artists/ArtistsPage";
 import { MainContent } from "@/components/ui/Containers";
 import { SelectedArtist } from "@/components/artists/SelectedArtist";
 import { SessionProvider } from "next-auth/react";
-
+import MainPlayer from "./player/MainPlayer";
 
 export default function AuthLayoutContext({ children, header }: { children: React.ReactNode, header: React.ReactNode }) {
     return (
@@ -13,19 +13,21 @@ export default function AuthLayoutContext({ children, header }: { children: Reac
             <SessionProvider>
                 <SelectedArtistProvider>
                     {header}
-                    <div className="w-full h-full flex gap-2">
-                        <MainContent>
-                            <div className="flex w-full h-full flex-col gap-4 md:p-6">
-                                {children}
+                    <div className="w-full min-h-0 flex flex-grow p-2">
+                        <div className="w-full h-full flex gap-2">
+                            <div className="overflow-hidden bg-background rounded-lg w-full h-full flex flex-col">
+                                <div className="overflow-scroll overflow-x-hidden flex flex-col gap-2 p-4 h-full w-full">
+                                    {children}
+                                </div>
                             </div>
-                        </MainContent>
-
-                        <SideContent>
-                            <SelectedArtist />
-                        </SideContent>
+                            <SideContent>
+                                <SelectedArtist />
+                            </SideContent>
+                        </div>
                     </div>
+                    <MainPlayer />
                 </SelectedArtistProvider >
-            </SessionProvider>
+            </SessionProvider >
         </>
     )
 }

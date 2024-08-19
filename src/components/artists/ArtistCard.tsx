@@ -37,7 +37,7 @@ export const ArtistCard = ({ className, artist }: { className?: string, artist: 
             className={`h-full cursor-pointer rounded-lg overflow-hidden w-full flex flex-col relative ${className}`}
         >
             <motion.div animate={hovered ? { scale: 0.9 } : { scale: 1 }} className={`w-full z-10 aspect-square overflow-hidden rounded-xl h-full flex flex-col relative`}>
-                <Image className="object-cover" loading="eager" src={image} alt={name} fill />
+                <Image className="object-cover" loading="eager" src={image} alt={name} fill sizes="600px" />
             </motion.div>
 
             <Ranking ranking={ranking} />
@@ -77,7 +77,7 @@ const ArtistPublicLink = ({ public_url, name, cardHovered }: { public_url: strin
             onMouseLeave={() => { setHovered(false) }}
             href={public_url}
             className="flex z-10 p-3 gap-2 items-center">
-            <p className={`md:pl-3 text-center md:text-left truncate font-bold md:font-extrabold md:text-lg ${hovered && "underline"}`}>{name}</p>
+            <p className={`md:pl-3 text-center md:text-left truncate ${hovered && "underline"}`}>{name}</p>
             <SpotifyLink hovered={cardHovered} width={20} height={20} />
         </Link>
     )

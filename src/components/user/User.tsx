@@ -11,7 +11,7 @@ export const User = async () => {
     const user = await getUserData(session?.accessToken as string);
 
     return (
-        <div className="flex bg-card p-2 w-full rounded-xl items-center justify-between">
+        <div className="flex bg-card p-2 rounded-full items-center justify-between">
             <UserInfo {...user} />
         </div>
     )

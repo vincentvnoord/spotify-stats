@@ -41,7 +41,7 @@ export const SelectedArtist = () => {
                 </div>
                 <div className="absolute z-10 w-full top-0 left-0 h-full bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl">
                 </div>
-                <Image src={image ?? "/songtest.png"} alt="meh" fill className="object-cover absolute -z-0 rounded-b-3xl" />
+                <Image src={image ?? "/songtest.png"} priority alt="meh" fill sizes="500px" className="object-cover absolute -z-0 rounded-b-3xl" />
                 <div className="absolute z-50 top-0 right-0 p-3">
                     <button onClick={() => { setSelectedArtist(null); setArtistData(null); }} className="bg-background hover:bg-card rounded-full p-2">
                         <XIcon size={20} />

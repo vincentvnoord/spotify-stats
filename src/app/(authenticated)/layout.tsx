@@ -15,7 +15,7 @@ export default async function AuthLayout({
     }
 
     return (
-        <div className="flex flex-col justify-start items-start h-full w-full max-h-dvh">
+        <div className="flex flex-col justify-start items-start transition-height duration-200 ease-in h-dvh w-full max-h-dvh">
             <AuthLayoutContext header={<Header />}>
                 {children}
             </AuthLayoutContext>

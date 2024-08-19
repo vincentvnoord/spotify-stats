@@ -47,7 +47,7 @@ export const TrackList = () => {
     }, [timeFrame, session.data?.accessToken]);
 
     return (
-        <motion.div className="flex flex-col gap-2">
+        <motion.div className="flex h-full flex-col gap-2">
             {
                 loading ?
                     Array.from({ length: 20 }).map((_, index) => (
@@ -80,7 +80,7 @@ const TrackCard = ({ name, ranking, artists, image, public_url }: BasicTrackInfo
             <div className="flex gap-4 items-center">
                 <p className="text-xl min-w-9 text-center text-secondary">{ranking}</p>
                 <div className="w-10 h-10 object-contain relative rounded-md overflow-hidden">
-                    <Image className="object-cover" src={image} alt="track" fill />
+                    <Image className="object-cover" src={image} alt="track" sizes="100px" fill />
                 </div>
                 <div className="flex flex-col">
                     <p className="">{name}</p>
