@@ -14,7 +14,7 @@ const cache = new Map<string, { list: BasicTrackInfo[], date: Date }>();
 
 export const TrackList = () => {
     const [topTracks, setTopTracks] = useState<BasicTrackInfo[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const session = useSession();
     const searchParams = useSearchParams();
     const timeFrame = searchParams.get("timeRange") || "short_term";
@@ -55,14 +55,15 @@ export const TrackList = () => {
                     ))
                     :
                     topTracks.map((track) => (
-                        <TrackCard key={track.ranking} {...track} />
+                        <TrackCard key={track.ranking} track={track} />
                     ))
             }
         </motion.div>
     )
 }
 
-const TrackCard = ({ name, ranking, artists, image, public_url }: BasicTrackInfo) => {
+export const TrackCard = ({ track, className }: { track: BasicTrackInfo, className?: string }) => {
+    const { name, ranking, artists, image, public_url } = track;
     const [hovered, setHovered] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref);
