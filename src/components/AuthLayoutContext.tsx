@@ -5,27 +5,29 @@ import { SideContent } from "@/components/artists/ArtistsPage";
 import { MainContent } from "@/components/ui/Containers";
 import { SelectedArtist } from "@/components/artists/SelectedArtist";
 import { SessionProvider } from "next-auth/react";
+import MainPlayer from "./player/MainPlayer";
 
-
-export default function AuthLayoutContext({ children, menu }: { children: React.ReactNode, menu: React.ReactNode }) {
+export default function AuthLayoutContext({ children, header }: { children: React.ReactNode, header: React.ReactNode }) {
     return (
         <>
             <SessionProvider>
                 <SelectedArtistProvider>
-                    <Navbar className="xl:pr-0" >
-                        {menu}
-                    </Navbar>
-                    <MainContent>
-                        <div className="flex w-full h-full flex-col gap-4 md:p-6">
-                            {children}
+                    {header}
+                    <div className="w-full min-h-0 flex flex-grow p-2">
+                        <div className="w-full h-full flex gap-2">
+                            <div className="overflow-hidden bg-background rounded-lg w-full h-full flex flex-col">
+                                <div className="overflow-scroll overflow-x-hidden flex flex-col gap-2 p-4 h-full w-full">
+                                    {children}
+                                </div>
+                            </div>
+                            <SideContent>
+                                <SelectedArtist />
+                            </SideContent>
                         </div>
-                    </MainContent>
-
-                    <SideContent>
-                        <SelectedArtist />
-                    </SideContent>
+                    </div>
+                    <MainPlayer />
                 </SelectedArtistProvider >
-            </SessionProvider>
+            </SessionProvider >
         </>
     )
 }

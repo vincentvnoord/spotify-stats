@@ -1,8 +1,6 @@
 import React from "react";
 import { getSession } from "@/auth";
 import { redirect } from "next/navigation";
-import ArtistsPage from "@/components/artists/ArtistsPage";
-import { getUserData } from "@/lib/spotify";
 import { PageHeader } from "@/components/PageHeader";
 import { ArtistsGrid } from "@/components/artists/ArtistList";
 
@@ -15,7 +13,6 @@ export default async function Artists({ searchParams }: { searchParams: { timeRa
     return (
         <>
             <PageHeader title="ARTISTS" />
-            <div className="h-0.5 w-full bg-secondary"></div>
             <ArtistsGrid />
         </>
     );

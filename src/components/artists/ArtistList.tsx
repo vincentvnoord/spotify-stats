@@ -22,11 +22,9 @@ export const ArtistsGrid = () => {
     const pathName = usePathname();
     const timeFrame = searchParams.get("timeRange") || "short_term";
 
-    console.log(topArtists[0]);
-
     useEffect(() => {
         const handleArtistSelect = (id: string | null = null) => {
-            if ((initialLoad && window.innerWidth > 1280) || !initialLoad) {
+            if (initialLoad && window.innerWidth > 1280) {
                 if (id) {
                     setSelectedArtist(id);
                 } else {
@@ -71,13 +69,13 @@ export const ArtistsGrid = () => {
     }, [timeFrame, session.data?.accessToken, pathName]);
 
     return (
-        <div className="w-full self-center">
-            <div className="grid grid-cols-2 md:grid-cols-4 sm:grid-cols-3 gap-5 w-full">
+        <div className="w-full h-full self-center">
+            <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-5 w-full">
                 {
-                    loading ?
+                    loading || topArtists.length <= 0 ?
                         <>
                             <LoadingCard key={-1} index={-1} className="row-span-2 col-span-2" />
-                            {Array.from({ length: 10 }).map((_, index) => (
+                            {Array.from({ length: 20 }).map((_, index) => (
                                 <LoadingCard key={index} index={index} />
                             ))}
                         </>

@@ -14,7 +14,7 @@ const cache = new Map<string, { list: BasicTrackInfo[], date: Date }>();
 
 export const TrackList = () => {
     const [topTracks, setTopTracks] = useState<BasicTrackInfo[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const session = useSession();
     const searchParams = useSearchParams();
     const timeFrame = searchParams.get("timeRange") || "short_term";
@@ -47,7 +47,7 @@ export const TrackList = () => {
     }, [timeFrame, session.data?.accessToken]);
 
     return (
-        <motion.div className="flex flex-col gap-2">
+        <motion.div className="flex h-full flex-col gap-2">
             {
                 loading ?
                     Array.from({ length: 20 }).map((_, index) => (
@@ -55,14 +55,15 @@ export const TrackList = () => {
                     ))
                     :
                     topTracks.map((track) => (
-                        <TrackCard key={track.ranking} {...track} />
+                        <TrackCard key={track.ranking} track={track} />
                     ))
             }
         </motion.div>
     )
 }
 
-const TrackCard = ({ name, ranking, artists, image, public_url }: BasicTrackInfo) => {
+export const TrackCard = ({ track, className }: { track: BasicTrackInfo, className?: string }) => {
+    const { name, ranking, artists, image, public_url } = track;
     const [hovered, setHovered] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref);
@@ -80,7 +81,7 @@ const TrackCard = ({ name, ranking, artists, image, public_url }: BasicTrackInfo
             <div className="flex gap-4 items-center">
                 <p className="text-xl min-w-9 text-center text-secondary">{ranking}</p>
                 <div className="w-10 h-10 object-contain relative rounded-md overflow-hidden">
-                    <Image className="object-cover" src={image} alt="track" fill />
+                    <Image className="object-cover" src={image} alt="track" sizes="100px" fill />
                 </div>
                 <div className="flex flex-col">
                     <p className="">{name}</p>

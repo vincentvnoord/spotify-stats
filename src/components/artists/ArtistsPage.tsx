@@ -18,7 +18,7 @@ export default function ArtistsPage({ }: {}) {
         <>
             <SelectedArtistProvider>
                 <SideContent />
-                <div className="w-full">
+                <div className="w-full h-full">
                     <MainContent>
                         <div className="flex w-full flex-col gap-4 md:p-6">
                             <PageHeader title="ARTISTS" />
@@ -38,7 +38,7 @@ export default function ArtistsPage({ }: {}) {
 
 export const SideContent = ({ children, className }: { children?: React.ReactNode, className?: string }) => {
     const { selectedArtist, setSelectedArtist } = useContext(SelectedArtistContext);
-    const defaultStyle = "absolute h-full z-30 w-full xl:p-6 xl:pl-0 xl:pr-2 top-0 flex flex-col items-center xl:max-w-[400px] xl:sticky xl:max-h-screen";
+    const defaultStyle = "absolute h-full z-30 w-full left-0 xl:pl-0 top-0 flex flex-col items-center xl:max-w-[400px] xl:sticky xl:max-h-screen";
 
     if (!selectedArtist) return null;
 

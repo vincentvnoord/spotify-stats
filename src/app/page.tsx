@@ -10,7 +10,7 @@ export default async function Home() {
   const session = await getSession();
 
   if (session) {
-    redirect("/tracks");
+    redirect("/dashboard");
   }
 
 
@@ -28,4 +28,3 @@ export default async function Home() {
     </main>
   );
 }
-
