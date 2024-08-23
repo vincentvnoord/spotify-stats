@@ -8,24 +8,89 @@ import Link from "next/link";
 import { SpotifyLink } from "../ui/SpotifyLink";
 import { useRouter } from "next/navigation";
 
-export const FavoriteArtist = ({ className, artist }: { className?: string, artist: BasicArtistInfo }) => {
-    const { name, image, public_url, id } = artist;
-    const [hovered, setHovered] = useState(false);
-    const classNames = `${artist.ranking > 3 && "hidden xl:flex"} ${artist.ranking === 3 && "hidden md:flex"} ${artist.ranking >= 4 && artist.ranking <= 5 ? "hidden lg:flex" : ""}`
+export const TopTrackHighlight = ({ track }: { track: BasicTrackInfo }) => {
+    const animation = track.ranking === 1 ? { y: -10 } : { y: 0 };
+
+    const variants = {
+        left: {
+            x: "30%",
+            y: 20,
+            rotate: -15
+        },
+        right: {
+            x: "-30%",
+            y: 20,
+            rotate: 15
+        }
+    }
+
+    let variant = track.ranking === 2 ? "left" : "";
+    if (track.ranking === 3) variant = "right";
+
+    const router = useRouter();
+
+    const linkClicked = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+        router.push(track.public_url);
+    }
 
     return (
-        <motion.div
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`h-full max-h-32 cursor-pointer rounded-lg overflow-hidden w-full flex flex-col relative ${className}`}
-        >
-            <motion.div animate={hovered ? { scale: 0.9 } : { scale: 1 }} className={`w-full z-10 aspect-square overflow-hidden rounded-lg h-full flex flex-col relative`}>
-                <Image className="object-cover" loading="eager" src={image} alt={name} fill sizes="600px" />
+        <div className="flex md:p-6 w-full h-full flex-col justify-center">
+            <motion.div
+                initial={variant}
+                variants={variants}
+                animate={animation}
+                transition={{ duration: 3 + Math.random(), ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+                className={`relative flex items-center justify-center aspect-square rounded-2xl overflow-hidden shadow-md ${track.ranking === 3 ? "z-0" : "z-10"}`}>
+                <Image className="object-cover absolute top-0 left-0" src={track.image} fill alt={track.name} />
+                <div onClick={linkClicked}>
+                    <SpotifyLink hovered width={30} height={30} />
+                </div>
             </motion.div>
+        </div>
+    )
+}
 
-            <ArtistPublicLink public_url={public_url} name={name} cardHovered={hovered} />
-        </motion.div>
+export const TopArtistHighlight = ({ artist }: { artist: BasicArtistInfo }) => {
+    const animation = artist.ranking === 1 ? { y: -10 } : { y: 0 };
+
+    const variants = {
+        left: {
+            x: "30%",
+            y: 20,
+            rotate: -15
+        },
+        right: {
+            x: "-30%",
+            y: 20,
+            rotate: 15
+        }
+    }
+
+    let variant = artist.ranking === 2 ? "left" : "";
+    if (artist.ranking === 3) variant = "right";
+
+    const router = useRouter();
+
+    const linkClicked = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+        router.push(artist.public_url);
+    }
+
+    return (
+        <div className="flex w-full flex-col justify-center">
+            <motion.div
+                initial={variant}
+                variants={variants}
+                animate={animation}
+                transition={{ duration: 3 + Math.random(), ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+                className={`relative flex items-center justify-center aspect-square rounded-full overflow-hidden shadow-md ${artist.ranking === 3 ? "z-0" : "z-10"}`}>
+                <Image className="object-cover absolute top-0 left-0" src={artist.image} fill alt={artist.name} />
+                <div onClick={linkClicked}>
+                    <SpotifyLink hovered width={30} height={30} />
+                </div>
+            </motion.div>
+        </div>
     )
 }
 
@@ -87,7 +152,7 @@ export const FavoriteGenres = () => {
     }
 
     return (
-        <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="relative bg-black/50 overflow-hidden rounded-lg h-full w-full" >
+        <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="relative overflow-hidden rounded-lg h-full w-full" >
             <div className="absolute top-0 left-0 w-full h-full">
                 <ScrollingGenre className="z-0 text-6xl" right={false} animationProps={{ initial: { rotate: -30 }, transition: { duration: duration(9) } }}>
                     POP MERSIC YA MEEN

@@ -45,7 +45,7 @@ const UserInfo = ({ display_name, images }: UserProps) => {
                 onMouseLeave={() => setHovered(false)}
                 onClick={() => { setSelected(!selected) }}
             >
-                <div className="relative bg-card rounded-full overflow-hidden w-7 h-7 object-contain">
+                <div className="relative bg-card rounded-full overflow-hidden w-10 h-10 object-contain">
                     {avatar && <Image src={avatar} fill sizes="100px" alt="avatar" />}
                 </div>
             </div>
