@@ -6,27 +6,30 @@ import { MainContent } from "@/components/ui/Containers";
 import { SelectedArtist } from "@/components/artists/SelectedArtist";
 import { SessionProvider } from "next-auth/react";
 import MainPlayer from "./player/MainPlayer";
+import { SpotifyPlayer } from "./SpotifyPlayer";
 
-export default function AuthLayoutContext({ children, header }: { children: React.ReactNode, header: React.ReactNode }) {
+export default function AuthLayoutContext({ children, header, token }: { children: React.ReactNode, header: React.ReactNode, token: string }) {
     return (
         <>
             <SessionProvider>
-                <SelectedArtistProvider>
-                    {header}
-                    <div className="w-full min-h-0 flex flex-grow p-2">
-                        <div className="w-full h-full flex gap-2">
-                            <div className="overflow-hidden bg-background rounded-lg w-full h-full flex flex-col">
-                                <div className="overflow-scroll overflow-x-hidden flex flex-col gap-2 p-4 h-full w-full">
-                                    {children}
+                <SpotifyPlayer token={token} >
+                    <SelectedArtistProvider>
+                        {header}
+                        <div className="w-full min-h-0 flex flex-grow p-2">
+                            <div className="w-full h-full flex gap-2">
+                                <div className="overflow-hidden bg-background rounded-lg w-full h-full flex flex-col">
+                                    <div className="overflow-scroll overflow-x-hidden flex flex-col gap-2 p-4 h-full w-full">
+                                        {children}
+                                    </div>
                                 </div>
+                                <SideContent>
+                                    <SelectedArtist />
+                                </SideContent>
                             </div>
-                            <SideContent>
-                                <SelectedArtist />
-                            </SideContent>
                         </div>
-                    </div>
-                    <MainPlayer />
-                </SelectedArtistProvider >
+                        <MainPlayer />
+                    </SelectedArtistProvider >
+                </SpotifyPlayer>
             </SessionProvider >
         </>
     )

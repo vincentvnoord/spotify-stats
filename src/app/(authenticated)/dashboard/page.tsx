@@ -1,5 +1,5 @@
 import { getSession } from "@/auth";
-import { getUserData, getTopArtists, getTopTracks } from "@/lib/spotify";
+import { getUserData, getTopArtists, getTopTracks, getTopGenres } from "@/lib/spotify";
 import { FavoriteGenres, FavoriteTrack, TopTrackHighlight } from "@/components/dashboard/Top";
 import { LinkedSection } from "@/components/dashboard/LinkedSection";
 import { TopArtistHighlight } from "@/components/dashboard/Top";
@@ -10,6 +10,7 @@ export default async function Dashboard() {
 
     const topArtists = await getTopArtists(session?.accessToken as string, "short_term", 3);
     const topTracks = await getTopTracks(session?.accessToken as string, "short_term", 3);
+    const topGenres = await getTopGenres(session?.accessToken as string, "short_term");
 
     return (
         <>
@@ -42,7 +43,7 @@ export default async function Dashboard() {
                 </LinkedSection>
 
                 <LinkedSection title="Your Favorite Genres" href="/genres" className="flex-grow">
-                    <FavoriteGenres />
+                    <FavoriteGenres topGenres={topGenres} />
                 </LinkedSection>
             </div>
         </>

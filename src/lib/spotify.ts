@@ -45,7 +45,6 @@ export async function getTopTracks(accessToken: string, timeRange: string, limit
 
     if (response.ok) {
         const data = await response.json();
-        console.log(data);
         tracks = data.items.map((track: any, index: number) => {
             return {
                 name: track.name,
@@ -136,4 +135,39 @@ export async function getArtistData(accessToken: string, id: string): Promise<Fu
     }
 
     return artist;
+}
+
+export type GenreRank = {
+    genre: string,
+    count: number
+}
+
+export async function getTopGenres(accessToken: string, timeRange: string, limit: number = 50): Promise<GenreRank[]> {
+    const response = await fetch(`${spotifyAPI}/me/top/artists?time_range=${timeRange}&limit=${limit}`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    let genreRanking: GenreRank[] = [];
+
+    if (response.ok) {
+        const data = await response.json();
+        for (let artist of data.items) {
+            for (let genre of artist.genres) {
+                let genreIndex = genreRanking.findIndex((rank) => rank.genre === genre);
+                if (genreIndex === -1) {
+                    genreRanking.push({ genre: genre, count: 1 });
+                } else {
+                    genreRanking[genreIndex].count++;
+                }
+            }
+        }
+    } else if (!response.ok) {
+        throw new Error("Error fetching top genres");
+    }
+
+    genreRanking.sort((a, b) => b.count - a.count);
+
+    return genreRanking;
 }

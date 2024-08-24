@@ -13,10 +13,11 @@ export default async function AuthLayout({
     if (!session) {
         redirect("/");
     }
+    const token = session.accessToken;
 
     return (
         <div className="flex flex-col justify-start items-start transition-height duration-200 ease-in h-dvh w-full max-h-dvh">
-            <AuthLayoutContext header={<Header />}>
+            <AuthLayoutContext token={token ? token : ""} header={<Header />}>
                 {children}
             </AuthLayoutContext>
         </div>

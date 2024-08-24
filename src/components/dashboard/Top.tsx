@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SpotifyLink } from "../ui/SpotifyLink";
 import { useRouter } from "next/navigation";
+import { GenreRank } from "@/lib/spotify";
 
 export const TopTrackHighlight = ({ track }: { track: BasicTrackInfo }) => {
     const animation = track.ranking === 1 ? { y: -10 } : { y: 0 };
@@ -136,7 +137,7 @@ const ArtistPublicLink = ({ public_url, name, cardHovered }: { public_url: strin
     )
 }
 
-export const FavoriteGenres = () => {
+export const FavoriteGenres = ({ topGenres }: { topGenres: GenreRank[] }) => {
     const [hovered, setHovered] = useState(false);
     const durations = [9, 15, 4, 15, 15];
 
@@ -155,19 +156,19 @@ export const FavoriteGenres = () => {
         <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="relative overflow-hidden rounded-lg h-full w-full" >
             <div className="absolute top-0 left-0 w-full h-full">
                 <ScrollingGenre className="z-0 text-6xl" right={false} animationProps={{ initial: { rotate: -30 }, transition: { duration: duration(9) } }}>
-                    POP MERSIC YA MEEN
+                    {topGenres[0].genre}
                 </ScrollingGenre>
                 <ScrollingGenre className="z-10 text-xl md:text-2xl" animationProps={{ initial: { rotate: -30 }, transition: { duration: 15 } }}>
-                    POP MERSIC YA MEEN
+                    {topGenres[1].genre}
                 </ScrollingGenre>
                 <ScrollingGenre className="z-10 text-xs md:text-5xl" animationProps={{ initial: { rotate: -30 }, transition: { duration: 4 } }}>
-                    MELODIC RAP
+                    {topGenres[2].genre}
                 </ScrollingGenre>
                 <ScrollingGenre right={false} className="z-10 text-4xl" animationProps={{ initial: { rotate: -30 }, transition: { duration: 12 } }}>
-                    COUNTRY
+                    {topGenres[3].genre}
                 </ScrollingGenre>
                 <ScrollingGenre className="z-10 text-sm" animationProps={{ initial: { rotate: -30 }, transition: { duration: 20 } }}>
-                    METAL
+                    {topGenres[4].genre}
                 </ScrollingGenre>
             </div>
         </div >

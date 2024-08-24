@@ -15,7 +15,7 @@ export const LinkedSection = ({ children, title, href, className }: { children: 
                     <div className="w-full h-full pb-2">
                         {children}
                     </div>
-                    <div className="absolute pointer-events-none top-0 left-0 z-20 bg-gradient-to-t from-black to-transparent w-full h-full flex flex-col justify-end p-3">
+                    <div className="absolute pointer-events-none top-0 left-0 z-20 bg-gradient-to-t from-black via-transparent to-transparent w-full h-full flex flex-col justify-end p-3">
                         <div className="flex gap-2">
                             <p className="text-xl font-bold">{title}</p>
                         </div>

@@ -13,7 +13,6 @@
   --foreground: hsl(0, 0%, 70%);
 }
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
